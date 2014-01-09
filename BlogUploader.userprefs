@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="BlogUploader/WatermarkProcessor.cs">
+    <Files>
+      <File FileName="BlogUploader/WatermarkProcessor.cs" Line="59" Column="73" />
+      <File FileName="BlogUploader/MainWindow.cs" Line="123" Column="58" />
+      <File FileName="BlogUploader/FlickUploader.cs" Line="1" Column="1" />
+      <File FileName="BlogUploader/AuthenticationWindow.cs" Line="20" Column="27" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
