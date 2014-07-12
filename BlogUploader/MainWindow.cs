@@ -48,19 +48,23 @@ namespace BlogUploader
 		
 		private void authWindow_AuthOK(Auth authData)
 		{
-			Application.Invoke (delegate {
-				if (authWindow != null) {
-					authWindow.Hide ();
-					authWindow.Dispose ();
-					authWindow = null;
+			try {
+				Application.Invoke (delegate {
+					if (authWindow != null) {
+						authWindow.Hide ();
+						authWindow.Dispose ();
+						authWindow = null;
+					}
+					lbUserName.Text = authData.User.UserName;
+					isFlickrAuthorized = true;
 				}
-				lbUserName.Text = authData.User.UserName;
-				isFlickrAuthorized = true;
-			}
-			);
-			if (!string.IsNullOrEmpty (flickr.OAuthAccessToken) 
-				&& !string.IsNullOrEmpty (flickr.OAuthAccessTokenSecret)) {
-				SaveFlickrAuthorization ();
+				);
+				if (!string.IsNullOrEmpty (flickr.OAuthAccessToken) 
+					&& !string.IsNullOrEmpty (flickr.OAuthAccessTokenSecret)) {
+					SaveFlickrAuthorization ();
+				}
+			} catch (Exception e) {
+				MessageBox.Show (e.Message);
 			}
 		}
 		
@@ -77,6 +81,7 @@ namespace BlogUploader
 				flickr.OAuthAccessTokenSecret = secret;
 			} catch (Exception e) {
 				Console.WriteLine (e.Message);
+				MessageBox.Show (e.Message);
 			}
 		}
 
@@ -89,6 +94,7 @@ namespace BlogUploader
 			} catch (Exception e) {
 				lbUserName.Text = "No autorizado";
 				Console.WriteLine (e.Message);
+				MessageBox.Show (e.Message);
 			}
 		}
 		

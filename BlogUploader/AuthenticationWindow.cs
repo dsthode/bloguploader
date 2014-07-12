@@ -13,17 +13,21 @@ namespace BlogUploader
 		public AuthenticationWindow (Flickr flickr) : 
 				base(Gtk.WindowType.Toplevel)
 		{
-			this.Build ();
-			this.flickr = flickr;
 			try {
-				reqToken = flickr.OAuthGetRequestToken ("oob");
-			} catch (OAuthException) {
-				flickr.OAuthAccessToken = string.Empty;
-				flickr.OAuthAccessTokenSecret = string.Empty;
-				reqToken = flickr.OAuthGetRequestToken ("oob");
+				this.Build ();
+				this.flickr = flickr;
+				try {
+					reqToken = flickr.OAuthGetRequestToken ("oob");
+				} catch (OAuthException) {
+					flickr.OAuthAccessToken = string.Empty;
+					flickr.OAuthAccessTokenSecret = string.Empty;
+					reqToken = flickr.OAuthGetRequestToken ("oob");
+				}
+				string url = flickr.OAuthCalculateAuthorizationUrl (reqToken.Token, AuthLevel.Write);
+				System.Diagnostics.Process.Start (url);
+			} catch (Exception e) {
+				MessageBox.Show (e.Message);
 			}
-			string url = flickr.OAuthCalculateAuthorizationUrl (reqToken.Token, AuthLevel.Write);
-			System.Diagnostics.Process.Start (url);
 		}
 		
 		private void btAutenticate_Click(object sender, EventArgs eventArgs)
@@ -39,6 +43,7 @@ namespace BlogUploader
 					}
 				} catch (Exception e) {
 					Console.WriteLine (e.Message);
+					MessageBox.Show (e.Message);
 				}
 			}
 		}
